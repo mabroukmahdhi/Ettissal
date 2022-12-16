@@ -4,10 +4,13 @@
 // See License.txt in the project root for license information.
 // ---------------------------------------------------------------
 
+using Ettissal.Views;
+
 namespace Ettissal.Services
 {
     public interface IConnectionService
     {
-        ValueTask<bool> CheckConnectivityAsync();
+        void StartConnectivityCheck(ConnectedComponent component);
+        void DisposeConnectionCheck();
     }
 }

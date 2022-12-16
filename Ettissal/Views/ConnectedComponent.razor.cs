@@ -4,13 +4,18 @@
 // See License.txt in the project root for license information.
 // ---------------------------------------------------------------
 
+using System;
+using Ettissal.Services;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 
 namespace Ettissal.Views
 {
-    public partial class ConnectedComponent : ComponentBase
+    public partial class ConnectedComponent : ComponentBase, IDisposable
     {
+        [Inject]
+        public IConnectionService ConnectionService { get; set; }
+
         [Parameter]
         public RenderFragment Online { get; set; }
 
@@ -18,6 +23,9 @@ namespace Ettissal.Views
         public RenderFragment Offline { get; set; }
 
         public bool IsOnline { get; set; }
+
+        protected override void OnInitialized() =>
+            ConnectionService.StartConnectivityCheck(this);
 
         [JSInvokable("Connection.StatusChanged")]
         public void OnConnectionStatusChanged(bool isOnline)
@@ -29,5 +37,8 @@ namespace Ettissal.Views
 
             StateHasChanged();
         }
+
+        public void Dispose() =>
+            ConnectionService.DisposeConnectionCheck();
     }
 }
