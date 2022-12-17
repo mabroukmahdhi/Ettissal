@@ -4,6 +4,8 @@
 // See License.txt in the project root for license information.
 // ---------------------------------------------------------------
 
+using System;
+using System.Threading.Tasks;
 using Ettissal.Views;
 using Microsoft.JSInterop;
 
@@ -11,21 +13,28 @@ namespace Ettissal.Services
 {
     internal class ConnectionService : IConnectionService
     {
-        private readonly IJSRuntime jsRuntime;
+        private readonly Lazy<Task<IJSObjectReference>> moduleTask;
 
         public ConnectionService(IJSRuntime jsRuntime) =>
-            this.jsRuntime = jsRuntime;
+            this.moduleTask = new(() => jsRuntime.InvokeAsync<IJSObjectReference>(
+                "import", "./_content/Ettissal/ettissal.js").AsTask());
 
-        public void StartConnectivityCheck(ConnectedComponent component)
+        public async void StartConnectivityCheck(ConnectedComponent component)
         {
-            _ = jsRuntime.InvokeVoidAsync(
-                identifier: "Connection.Initialize",
-                args: DotNetObjectReference.Create(component));
+            var module = await moduleTask.Value;
+            await module.InvokeVoidAsync(
+               identifier: "initializeConnectedComponent",
+               args: DotNetObjectReference.Create(component));
         }
 
-        public void DisposeConnectionCheck()
+        public async void DisposeConnectionCheck()
         {
-            _ = jsRuntime.InvokeVoidAsync("Connection.Dispose");
+            if (moduleTask.IsValueCreated)
+            {
+                var module = await moduleTask.Value;
+                await module.InvokeVoidAsync(
+                   identifier: "disposeConnectedComponent");
+            }
         }
     }
 }

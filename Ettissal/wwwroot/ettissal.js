@@ -5,8 +5,8 @@ export function initializeConnectedComponent(interop) {
         interop.invokeMethodAsync("Connection.StatusChanged", navigator.onLine);
     }
 
-    window.addEventListener("online", handler);
-    window.addEventListener("offline", handler);
+    window.addEventListener("online", connectedComponentEventHandler);
+    window.addEventListener("offline", connectedComponentEventHandler);
 
     connectedComponentEventHandler(navigator.onLine);
 }
@@ -14,7 +14,7 @@ export function initializeConnectedComponent(interop) {
 export function disposeConnectedComponent() {
     if (connectedComponentEventHandler != null) {
 
-        window.removeEventListener("online", handler);
-        window.removeEventListener("offline", handler);
+        window.removeEventListener("online", connectedComponentEventHandler);
+        window.removeEventListener("offline", connectedComponentEventHandler);
     }
 }
