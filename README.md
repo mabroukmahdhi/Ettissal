@@ -5,7 +5,7 @@
 # Ettissal
 A nuget package that provides a component for Blazor WASM to check application connectivity to internet.
 
-- Ettissal package: [![Nuget](https://img.shields.io/nuget/v/Ettissal)](https://www.nuget.org/packages/Ettissal/)
+
 
 ## Installation
 Install the nuget package in your Blazor WASM project:
