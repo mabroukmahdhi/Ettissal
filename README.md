@@ -1,3 +1,7 @@
+<p align="center">
+  <img  src="https://github.com/mabroukmahdhi/Ettissal/blob/main/ic_connected.png">
+</p>
+
 # Ettissal
 A nuget package that provides a component for Blazor WASM to check application connectivity to internet.
 
