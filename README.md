@@ -46,6 +46,12 @@ Using this component, you can check the application connectivity to internet. Yo
 
 This will help you to show the content based on the application connectivity to internet. As you can see, you can use the `Online` and `Offline` components to show the content when the application is online or offline.
 
+## Result
+
+<div align=center>
+		<img src="https://github.com/mabroukmahdhi/Ettissal/blob/main/Ettissal.gif" />
+	</div>
+
 ## License
 This project is licensed under the MIT License - see the [LICENSE](https://github.com/mabroukmahdhi/Ettissal/blob/main/LICENSE) file for details.
 
