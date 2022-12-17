@@ -22,6 +22,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Constributing.md" />
+  </ItemGroup>
+
+  <ItemGroup>
     
     <None Include="..\ic_connected.png">
       <Pack>True</Pack>
@@ -33,6 +37,11 @@
       <PackagePath>\</PackagePath>
     </None>
     <None Include="..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+
+    <None Include="..\Constributing.md">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>
